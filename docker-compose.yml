@@ -1,0 +1,23 @@
+services:
+  web:
+    build: .
+    container_name: sapestore_web
+    ports:
+      - "8081:80"
+    volumes:
+      - ./Pagina:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: sapestore_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sapestore
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
