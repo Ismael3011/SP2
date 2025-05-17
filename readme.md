@@ -23,7 +23,7 @@ Sapestore es una tienda en línea especializada en zapatillas y ropa de moda urb
 
 1. Clona este repositorio en tu servidor local:
    ```bash
-   git clone https://github.com/Ismael3011/Sapestore
+   git clone https://github.com/Ismael3011/SP2
    ```
 2. Configura la base de datos:
    - Descargar el archivo `db.sql` y `update.sql` y crear la base de datos.
@@ -35,7 +35,7 @@ Sapestore es una tienda en línea especializada en zapatillas y ropa de moda urb
        ```bash
        docker-compose up -d
        ```
-     - Accede a `http://localhost:8080`.
+     - Accede a `http://localhost:8081`.
 
 ## Uso
 

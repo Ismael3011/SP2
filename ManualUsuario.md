@@ -43,7 +43,7 @@ Sapestore/
 1. **Abrir Terminal**  
 - Navega hasta el directorio donde se encuentra el archivo `docker-compose.yml`:
   ```bash
-  cd c:/xampp/htdocs/Sapestore/docker
+  cd c:/xampp/htdocs/Sapestore/
   ```
 
 2. **Iniciar los contenedores**  
@@ -55,6 +55,7 @@ Sapestore/
   1. Crear un contenedor para la web con PHP y Apache.  
   2. Crear un contenedor para la base de datos MySQL.  
   3. Montar la carpeta `Pagina` en el contenedor web en `/var/www/html`.
+  4. Importar la base de datos ya creada
 
 3. **Verificar el estado de los contenedores**  
 - Ejecuta:
@@ -68,7 +69,7 @@ Sapestore/
 
 5. **Acceder a la web**  
 - Abre un navegador y accede a:  
-  [http://localhost:8080](http://localhost:8081)
+  [http://localhost:8081](http://localhost:8081)
 
 > **A tener en cuenta:**  
 > Los datos de la base de datos se guardan en el volumen `db_data`, por lo que **no se perderán al detener los contenedores**.

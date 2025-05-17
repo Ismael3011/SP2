@@ -7,12 +7,12 @@ if (isset($_SESSION['user']) && $_SESSION['user']['rol'] === 'admin') {
                          u.nombre AS cliente_nombre, u.mail AS cliente_email, 
                          dp.cantidad, t.numero AS talla, t.precio, 
                          pr.nombre AS producto_nombre
-                  FROM Pedidos p
-                  INNER JOIN Usuario u ON p.usuario_id = u.ID
-                  INNER JOIN Detalles_pedido dp ON p.ID = dp.pedido_id
-                  INNER JOIN Producto_Talla pt ON dp.producto_talla_id = pt.ID
-                  INNER JOIN Producto pr ON pt.producto_id = pr.ID
-                  INNER JOIN Talla t ON pt.talla_id = t.ID
+                  FROM pedidos p
+                  INNER JOIN usuario u ON p.usuario_id = u.ID
+                  INNER JOIN detalles_pedido dp ON p.ID = dp.pedido_id
+                  INNER JOIN producto_talla pt ON dp.producto_talla_id = pt.ID
+                  INNER JOIN producto pr ON pt.producto_id = pr.ID
+                  INNER JOIN talla t ON pt.talla_id = t.ID
                   ORDER BY p.fecha DESC";
     $resultOrders = $conn->query($sqlOrders);
     ?>
@@ -101,9 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['talla_id'])) {
         $_SESSION['cart'][$tallaId]['quantity']++;
     } else {
         $sql = "SELECT p.ID AS producto_id, p.nombre AS producto_nombre, p.imagen_url, t.numero AS talla, t.precio, pt.ID AS producto_talla_id
-                FROM Producto p
-                INNER JOIN Producto_Talla pt ON p.ID = pt.producto_id
-                INNER JOIN Talla t ON pt.talla_id = t.ID
+                FROM producto p
+                INNER JOIN producto_talla pt ON p.ID = pt.producto_id
+                INNER JOIN talla t ON pt.talla_id = t.ID
                 WHERE t.ID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $tallaId);

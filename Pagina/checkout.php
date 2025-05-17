@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['payment_confirmed']) && $_POST['payment_confirmed'] === 'yes') {
             $conn->begin_transaction();
             try {
-                $sqlOrder = "INSERT INTO Pedidos (usuario_id, fecha, total, direccion) VALUES (?, NOW(), ?, ?)";
+                $sqlOrder = "INSERT INTO pedidos (usuario_id, fecha, total, direccion) VALUES (?, NOW(), ?, ?)";
                 $stmtOrder = $conn->prepare($sqlOrder);
                 if (!$stmtOrder) {
                     throw new Exception("Error en la preparación de la consulta: " . $conn->error);
@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     );
                     $stmtOrderDetail->execute();
 
-                    $sqlUpdateStock = "UPDATE Talla t
-                                       INNER JOIN Producto_Talla pt ON t.ID = pt.talla_id
+                    $sqlUpdateStock = "UPDATE talla t
+                                       INNER JOIN producto_talla pt ON t.ID = pt.talla_id
                                        SET t.stock = t.stock - ?
                                        WHERE pt.ID = ?";
                     $stmtUpdateStock = $conn->prepare($sqlUpdateStock);
