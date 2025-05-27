@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    if ($table === 'Usuario' && isset($_POST['contrasena'])) {
+    if ($table === 'usuario' && isset($_POST['contrasena'])) {
         $_POST['contrasena'] = password_hash($_POST['contrasena'], PASSWORD_BCRYPT);
     }
 
@@ -80,18 +80,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $precio = $conn->real_escape_string($talla['precio']);
             $stock = $conn->real_escape_string($talla['stock']);
 
-            $sqlTalla = "INSERT INTO Talla (numero, precio, stock) VALUES ('$numero', '$precio', '$stock')";
+            $sqlTalla = "INSERT INTO talla (numero, precio, stock) VALUES ('$numero', '$precio', '$stock')";
             if ($conn->query($sqlTalla) === TRUE) {
                 $tallaId = $conn->insert_id;
 
-                $sqlProductoTalla = "INSERT INTO Producto_Talla (producto_id, talla_id) VALUES ('$productId', '$tallaId')";
+                $sqlProductoTalla = "INSERT INTO producto_talla (producto_id, talla_id) VALUES ('$productId', '$tallaId')";
                 $conn->query($sqlProductoTalla);
             }
         }
 
         if ($table === 'Producto' && !empty($additionalImages)) {
             foreach ($additionalImages as $imageUrl) {
-                $sqlAdditionalImage = "INSERT INTO Producto_Imagen (producto_id, imagen_url) VALUES ('$productId', '$imageUrl')";
+                $sqlAdditionalImage = "INSERT INTO producto_imagen (producto_id, imagen_url) VALUES ('$productId', '$imageUrl')";
                 $conn->query($sqlAdditionalImage);
             }
         }
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             echo "<option value=''>No hay categorías disponibles</option>";
                         }
                         echo "</select>";
-                    } elseif ($table === 'Usuario' && $row['Field'] == 'rol') {
+                    } elseif ($table === 'usuario' && $row['Field'] == 'rol') {
                         echo "<select id='{$row['Field']}' name='{$row['Field']}' required>";
                         echo "<option value='admin'>Admin</option>";
                         echo "<option value='cliente'>Cliente</option>";
@@ -167,14 +167,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
 
-            <?php if ($table === 'Producto'): ?>
+            <?php if ($table === 'producto'): ?>
                 <div class="form-group">
                     <label for="marca_id">Marca</label>
                     <select id="marca_id" name="marca_id" required onchange="loadCategories(this.value)">
                         <option value="">Seleccione una marca</option>
                         <?php
                         // Cargar marcas
-                        $sql = "SELECT ID, nombre FROM Marca";
+                        $sql = "SELECT ID, nombre FROM marca";
                         $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                             echo "<option value='{$row['ID']}'>{$row['nombre']}</option>";
@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             <?php endif; ?>
 
-            <?php if ($table === 'Categoria_Marca'): ?>
+            <?php if ($table === 'categoria_marca'): ?>
                 <div class="form-group">
                     <label for="marca_id">Marca</label>
                     <select id="marca_id" name="marca_id" required>
