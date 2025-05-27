@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $sqlProductoTalla = "INSERT INTO producto_talla (producto_id, talla_id) VALUES ('$productId', '$tallaId')";
                 $conn->query($sqlProductoTalla);
             }
+}
         }
 
         if ($table === 'producto' && !empty($additionalImages)) {
@@ -98,10 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         echo "Nuevo registro creado exitosamente";
         header('Location: ./admin.php');
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -143,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         echo "<input type='file' id='{$row['Field']}' name='{$row['Field']}' accept='image/*'>";
                     } elseif ($row['Field'] == 'categoria_id') {
                         echo "<select id='{$row['Field']}' name='{$row['Field']}' required>";
-                        $foreignSql = "SELECT ID, nombre FROM Categoria";
+                        $foreignSql = "SELECT ID, nombre FROM categoria";
                         $foreignResult = $conn->query($foreignSql);
                         if ($foreignResult->num_rows > 0) {
                             while ($foreignRow = $foreignResult->fetch_assoc()) {
@@ -218,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="tallas[0][precio]">Precio:</label>
                         <input type="number" step="0.01" name="tallas[0][precio]">
                         <label for="tallas[0][stock]">Stock:</label>
-                        <input type="number" name="tallas[0][stock']">
+                        <input type="number" name="tallas[0][stock]">
                         <button type="button" class="boton-eliminar" onclick="removeTalla(this)">Eliminar</button>
                     </div>
                     <button type="button" class="boton-agregar" onclick="addTalla()">Agregar Talla</button>
@@ -234,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="marca_id">Marca</label>
                     <select id="marca_id" name="marca_id" required>
                         <?php
-                        $sql = "SELECT ID, nombre FROM Marca";
+                        $sql = "SELECT ID, nombre FROM marca";
                         $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
                             echo "<option value='{$row['ID']}'>{$row['nombre']}</option>";
