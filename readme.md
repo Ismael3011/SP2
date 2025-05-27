@@ -33,7 +33,7 @@ Sapestore es una tienda en línea especializada en zapatillas y ropa de moda urb
    - Si usas Docker:
      - Ve a la carpeta `docker` y ejecuta:
        ```bash
-       docker-compose up -d
+       docker compose up --build
        ```
      - Accede a `http://localhost:8081`.
 
