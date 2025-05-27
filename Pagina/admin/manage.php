@@ -189,7 +189,7 @@ $campos = $resultado->fetch_fields();
                             <a href="update.php?table=<?php echo $tabla; ?>&id=<?php echo $fila['ID']; ?>" class="action-link edit-link">Editar</a>
                             <span class="action-separator">|</span>
                             <a href="#" class="action-link delete-link" onclick="confirmDelete('delete.php?table=<?php echo $tabla; ?>&id=<?php echo $fila['ID']; ?>')">Eliminar</a>
-                            <?php if ($tabla === 'Producto'): ?>
+                            <?php if ($tabla === 'producto'): ?>
                                 <span class="action-separator">|</span>
                                 <a href="#" class="action-link toggle-popular <?php echo in_array($fila['ID'], $popularProducts) ? 'active' : ''; ?>"
                                    data-id="<?php echo $fila['ID']; ?>"
