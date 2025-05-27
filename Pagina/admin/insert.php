@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
-        if ($table === 'Producto' && !empty($additionalImages)) {
+        if ($table === 'producto' && !empty($additionalImages)) {
             foreach ($additionalImages as $imageUrl) {
                 $sqlAdditionalImage = "INSERT INTO producto_imagen (producto_id, imagen_url) VALUES ('$productId', '$imageUrl')";
                 $conn->query($sqlAdditionalImage);
