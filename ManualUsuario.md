@@ -49,7 +49,7 @@ Sapestore/
 2. **Iniciar los contenedores**  
 - Ejecuta:
   ```bash
-  docker-compose up -d
+  docker compose up --build
   ```
 - Este comando hará lo siguiente:
   1. Crear un contenedor para la web con PHP y Apache.  
