@@ -55,9 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    if ($table === 'Producto' && !empty($additionalImages)) {
+    if ($table === 'producto' && !empty($additionalImages)) {
         foreach ($additionalImages as $imageUrl) {
-            $sqlAdditionalImage = "INSERT INTO Producto_Imagen (producto_id, imagen_url) VALUES ('$id', '$imageUrl')";
+            $sqlAdditionalImage = "INSERT INTO producto_imagen (producto_id, imagen_url) VALUES ('$id', '$imageUrl')";
             $conn->query($sqlAdditionalImage);
         }
     }
@@ -159,13 +159,13 @@ $row = $result->fetch_assoc();
                 }
             }
             ?>
-            <?php if ($table === 'Categoria_Marca'): ?>
+            <?php if ($table === 'categoria_marca'): ?>
                 <label for="nombre">Nombre de la Categoría:</label>
                 <input type="text" id="nombre" name="nombre" value="<?php echo $row['nombre']; ?>" required><br><br>
                 <label for="marca_id">Marca:</label>
                 <select id="marca_id" name="marca_id" required>
                     <?php
-                    $sql = "SELECT ID, nombre FROM Marca";
+                    $sql = "SELECT ID, nombre FROM marca";
                     $result = $conn->query($sql);
                     while ($marca = $result->fetch_assoc()) {
                         $selected = $row['marca_id'] == $marca['ID'] ? "selected" : "";
@@ -174,13 +174,13 @@ $row = $result->fetch_assoc();
                     ?>
                 </select><br><br>
             <?php endif; ?>
-            <?php if ($table === 'Producto'): ?>
+            <?php if ($table === 'producto'): ?>
                
                 <label for="marca_id">Marca:</label>
                 <select id="marca_id" name="marca_id" required onchange="loadCategories(this.value)">
                     <option value="">Seleccione una marca</option>
                     <?php
-                    $sql = "SELECT ID, nombre FROM Marca";
+                    $sql = "SELECT ID, nombre FROM marca";
                     $result = $conn->query($sql);
                     while ($marca = $result->fetch_assoc()) {
                         $selected = $row['marca_id'] == $marca['ID'] ? "selected" : "";
@@ -194,7 +194,7 @@ $row = $result->fetch_assoc();
                     <option value="">Seleccione una categoría</option>
                     <?php
                     if (!empty($row['marca_id'])) {
-                        $sqlCategorias = "SELECT ID, nombre FROM Categoria_Marca WHERE marca_id = ?";
+                        $sqlCategorias = "SELECT ID, nombre FROM categoria_marca WHERE marca_id = ?";
                         $stmtCategorias = $conn->prepare($sqlCategorias);
                         $stmtCategorias->bind_param("i", $row['marca_id']);
                         $stmtCategorias->execute();
@@ -221,7 +221,7 @@ $row = $result->fetch_assoc();
                 <h3>Tallas Disponibles</h3>
                 <div id="tallas-container" class="tallas-contenedor">
                     <?php
-                    $sqlTallas = "SELECT t.ID, t.numero, t.precio, t.stock FROM Talla t INNER JOIN Producto_Talla pt ON t.ID = pt.talla_id WHERE pt.producto_id = ?";
+                    $sqlTallas = "SELECT t.ID, t.numero, t.precio, t.stock FROM talla t INNER JOIN producto_talla pt ON t.ID = pt.talla_id WHERE pt.producto_id = ?";
                     $stmtTallas = $conn->prepare($sqlTallas);
                     $stmtTallas->bind_param("i", $id);
                     $stmtTallas->execute();
