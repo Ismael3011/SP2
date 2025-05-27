@@ -12,7 +12,7 @@ if (!is_dir('../fotos')) {
 }
 
 // Obtener las tablas disponibles
-$tablas = ["Categoria", "Marca", "Categoria_Marca", "Usuario", "Producto", "Talla", "Producto_Talla", "Pedidos", "Detalles_pedido","Producto_Imagen"];
+$tablas = ["categoria", "marca", "categoria_marca", "usuario", "producto", "talla", "producto_talla", "pedidos", "detalles_pedido","producto_imagen"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
